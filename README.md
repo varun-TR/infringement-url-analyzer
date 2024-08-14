@@ -106,7 +106,7 @@ Note: Even R, SQL can also be used for flattening JSON but for simplicity purpos
 Handling Missing Values:
 ![missing-values](https://github.com/user-attachments/assets/be305bf3-884d-4c3c-8786-7b324cb60ff8)
 
-ipaddresses and domain have missing values- Approach used:
+ipaddresses and domain have missing values- Approach used is given below:
 
 - Missing values for domain are removed - since, the count of values are small usually 19 which doesn't effect large datasets.
 - Missing values for ipaddress are imputed with Not Available since count is large (3320 large missing values) 
