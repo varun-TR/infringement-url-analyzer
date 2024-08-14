@@ -1,4 +1,4 @@
-# 🚨 Infringement URL Analyzer
+# 🚨 Infringement URL Analysis
 This repository contains a Python script designed to flatten nested data structures, extract and analyze infringing URLs, and generate insightful summaries. The project utilizes parallel processing to efficiently handle large datasets, making it suitable for high-performance environments.
 
 ## ✨ Features
