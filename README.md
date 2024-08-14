@@ -14,10 +14,6 @@ Nested data structure containing multiple infringing URLs, which is response.jso
 ## 📤 Output:
 A flattened CSV file where each row corresponds to an infringing URL, along with its domain and IP address.
 
-## Sample Summaries📈 :
-- Top 10 domains with the most infringements.
-- Top 10 IP addresses hosting infringing content.
-- Summary table showing the number of infringements per domain.
 ## Performance Considerations 🚀 
 The script is designed to run efficiently on systems with multiple CPUs. It leverages Python's multiprocessing library to parallelize the extraction of domains and IP addresses. The default configuration uses 4 CPUs, but this can be adjusted to fit the capabilities of your system.
 
@@ -107,6 +103,16 @@ Note: Even R, SQL can also be used for flattening JSON but for simplicity purpos
     ```
 ## Data Summarization & Analysis:
 
+Handling Missing Values:
+![missing-values](https://github.com/user-attachments/assets/be305bf3-884d-4c3c-8786-7b324cb60ff8)
+
+ipaddresses and domain have missing values- Approach used:
+
+- Missing values for domain are removed - since, the count of values are small usually 19 which doesn't effect large datasets.
+- Missing values for ipaddress are imputed with Not Available since count is large (3320 large missing values) 
+
+
+
 The analysis includes generating the following summarizations:
 
 1. **Count of Infringing URLs per Domain**:
@@ -133,6 +139,8 @@ The analysis includes generating the following summarizations:
 
 4. **Most pirated works**
    ![work_desc](https://github.com/user-attachments/assets/85ee143b-10bb-407c-9f33-2266d9b3ae07)
+
+   
 
    
 
