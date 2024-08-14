@@ -139,6 +139,8 @@ The analysis includes generating the following summarizations:
 
 4. **Most pirated works**
    ![work_desc](https://github.com/user-attachments/assets/85ee143b-10bb-407c-9f33-2266d9b3ae07)
+5. **Fake Urls received per day**
+   ![fake_url_days](https://github.com/user-attachments/assets/666507aa-ee99-4210-aece-f7f0e329921c)
 
    
 
