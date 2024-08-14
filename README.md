@@ -118,6 +118,9 @@ The analysis includes generating the following summarizations:
 1. **Count of Infringing URLs per Domain**:
 
     <img width="1183" alt="Screenshot 2024-08-14 at 9 44 45 AM" src="https://github.com/user-attachments/assets/86fac7b4-5221-46f8-ab65-e440af4ad1b2">
+    
+    This graph shows the distribution of infringing URLs across different domains. It helps identify which domains are most frequently used for hosting infringing content.
+    
 2. **Top 10 most frequent infringing URLs**
 
     The below are most used urls for pirated content mostly are from **google drives**
@@ -131,16 +134,29 @@ The analysis includes generating the following summarizations:
     - https://drive.google.com/file/d/1qMqeDOW5dGz1wnXZybp_f8Nf3u1hbtsf     2
     - https://drive.google.com/file/d/1qL3zla1W-PWkQEr0G7oS6ca3L1xF5i1W     2
     - https://drive.google.com/file/d/1QGMMbqy63N8KBdskK9DP-YIR2E8_9VsJ     2
-    
+
+   The analysis revealed that Google Drive links are among the most commonly used for sharing pirated content. Here are the top 10 most frequent infringing URLs (note: links have been deactivated for security) 
 
     **Caution:** Links are clickable but most of them doesn't display content. Proceed with care!
-3. **Top 10 Most Frequent IP Addresses:**
-    ![ipaddresses](https://github.com/user-attachments/assets/43e215df-89a4-4fdc-be33-68c5275edee0)
 
-4. **Most pirated works**
+
+4. **Top 10 Most Frequent IP Addresses:**
+    ![ipaddresses](https://github.com/user-attachments/assets/43e215df-89a4-4fdc-be33-68c5275edee0)
+   This graph showcases the IP addresses most commonly associated with infringing content. It can help identify potential hotspots of piracy activity.
+
+6. **Most pirated works**
    ![work_desc](https://github.com/user-attachments/assets/85ee143b-10bb-407c-9f33-2266d9b3ae07)
-5. **Fake Urls received per day**
+   This visualization presents the works that are most frequently pirated, based on the descriptions in the dataset. It provides insights into which types of content are most targeted by infringers.
+   
+8. **Fake Urls received per day**
    ![fake_url_days](https://github.com/user-attachments/assets/666507aa-ee99-4210-aece-f7f0e329921c)
+   This time series graph shows the number of potentially fake or malicious URLs reported each day. It can help identify trends or spikes in fraudulent activity over time.
+
+## 🤝 Contributing
+Contributions, issues, and feature requests are welcome! Feel free to check issues page if you want to contribute.
+
+## 📝 License
+This project is MIT licensed.
 
    
 
