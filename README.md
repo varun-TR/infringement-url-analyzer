@@ -1,5 +1,8 @@
-# 🚨 Infringement URL Analysis
+# Infringement URL Analysis 🚨
 This repository contains a Python script designed to flatten nested data structures, extract and analyze infringing URLs, and generate insightful summaries. The project utilizes parallel processing to efficiently handle large datasets, making it suitable for high-performance environments.
+
+## Workflow 🛠️
+![flowdiagram drawio](https://github.com/user-attachments/assets/b6398730-d059-4c1d-9949-3f888a578e63)
 
 ## ✨ Features
 1. 🗂️ Data Flattening: Automatically flattens nested JSON or similar data structures.
