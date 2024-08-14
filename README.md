@@ -131,7 +131,9 @@ The analysis includes generating the following summarizations:
 3. **Top 10 Most Frequent IP Addresses:**
     ![ipaddresses](https://github.com/user-attachments/assets/43e215df-89a4-4fdc-be33-68c5275edee0)
 
-   
+4. **Most pirated works**
+   ![work_desc](https://github.com/user-attachments/assets/85ee143b-10bb-407c-9f33-2266d9b3ae07)
+
    
 
 
