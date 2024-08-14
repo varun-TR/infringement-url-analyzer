@@ -2,11 +2,11 @@
 This repository contains a Python script designed to flatten nested data structures, extract and analyze infringing URLs, and generate insightful summaries. The project utilizes parallel processing to efficiently handle large datasets, making it suitable for high-performance environments.
 
 ## ✨ Features
-🗂️ Data Flattening: Automatically flattens nested JSON or similar data structures.
-🔗 Infringing URL Extraction: Extracts infringing URLs and processes each URL individually.
-🌐 Domain and IP Address Identification: Retrieves the domain and corresponding IP address for each infringing URL.
-⚡ Parallel Processing: Leverages multiple CPUs to accelerate domain and IP address extraction.
-📊 Data Summarization: Generates key insights from the data, including the most frequently infringed domains and their associated IP addresses.
+1. 🗂️ Data Flattening: Automatically flattens nested JSON or similar data structures.
+2. 🔗 Infringing URL Extraction: Extracts infringing URLs and processes each URL individually.
+3. 🌐 Domain and IP Address Identification: Retrieves the domain and corresponding IP address for each infringing URL.
+4. ⚡ Parallel Processing: Leverages multiple CPUs to accelerate domain and IP address extraction.
+5. 📊 Data Summarization: Generates key insights from the data, including the most frequently infringed domains and their associated IP addresses.
 
 ## 📥 Input:
 Nested data structure containing multiple infringing URLs.
