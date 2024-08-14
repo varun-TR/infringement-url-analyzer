@@ -128,6 +128,10 @@ The analysis includes generating the following summarizations:
     
 
     **Caution:** Links are clickable but most of them doesn't display content. Proceed with care!
+3. **Top 10 Most Frequent IP Addresses:**
+    ![ipaddresses](https://github.com/user-attachments/assets/43e215df-89a4-4fdc-be33-68c5275edee0)
+
+   
    
 
 
