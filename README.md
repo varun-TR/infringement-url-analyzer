@@ -32,5 +32,13 @@ The analysis script includes the following key components:
                         meta=['id', 'type', 'title', 'date_sent', 'date_received', 
                               ['works', 'description']], 
                         record_prefix='infringing_')
+    # Rename the columns for clarity
+    df = df.rename(columns={
+        'infringing_url': 'infringing URL',
+        'works.description': 'work_description'
+    })
+
+    # Saving the flattened data to CSV
+    df.to_csv('flattened_json_data.csv', index=False)
     ```
 
