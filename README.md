@@ -105,34 +105,31 @@ Note: Even R, SQL can also be used for flattening JSON but for simplicity purpos
     # Parallel processing setup
     plan(multicore, workers = 4)
     ```
-## Data Summarization
+## Data Summarization & Analysis:
 
 The analysis includes generating the following summarizations:
 
 1. **Count of Infringing URLs per Domain**:
 
-    ```r
-    # Load necessary libraries
-    library(ggplot2)
-    library(dplyr)
+    <img width="1183" alt="Screenshot 2024-08-14 at 9 44 45 AM" src="https://github.com/user-attachments/assets/86fac7b4-5221-46f8-ab65-e440af4ad1b2">
+2. **Top 10 most frequent infringing URLs**
+
+    The below are most used urls for pirated content mostly are from **google drives**
+                                          
+    https://drive.google.com/file/d/1tqRi2DiMjmeb_1KidMMcglWNEiJI4GIt     2
+    https://drive.google.com/file/d/1TJekGwVHJxoSSbgPzf3WV53DFx4yic2Y     2
+    https://drive.google.com/file/d/1tibAet-OUlazYuUOh0tFOtQfQr3X-7W8     2
+    https://drive.google.com/file/d/1SIr1jOKgD26TBRo7uOnCXHRTVJ6l8jG0     2
+    https://drive.google.com/file/d/1rv-89CQwtAv5nGT3tu9ZGYV48cknkvyo     2
+    https://drive.google.com/file/d/1RGbzMLTQw4zgy7YPjt15Qi8Seh7NSEHY     2
+    https://drive.google.com/file/d/1qMqeDOW5dGz1wnXZybp_f8Nf3u1hbtsf     2
+    https://drive.google.com/file/d/1qL3zla1W-PWkQEr0G7oS6ca3L1xF5i1W     2
+    https://drive.google.com/file/d/1QGMMbqy63N8KBdskK9DP-YIR2E8_9VsJ     2
     
-    # Load the data
-    df <- read.csv('flattened_data_with_domain_ip__.csv')
-    
-    # Count of infringing URLs per domain
-    domain_counts <- df %>%
-      count(domain) %>%
-      arrange(desc(n)) %>%
-      top_n(10, n)
-    
-    # Plot
-    ggplot(domain_counts, aes(x = reorder(domain, n), y = n)) +
-      geom_bar(stat = 'identity', fill = 'skyblue') +
-      labs(title = 'Top 10 Domains with Most Infringing URLs',
-           x = 'Domain',
-           y = 'Count of Infringing URLs') +
-      theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
-    ```
+
+    **Caution:** Links are clickable but most of them doesn't display content. Proceed with care!
+   
+
 
 
 
