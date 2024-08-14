@@ -8,8 +8,8 @@ This repository contains a Python script designed to flatten nested data structu
 4. ⚡ Parallel Processing: Leverages multiple CPUs to accelerate domain and IP address extraction.
 5. 📊 Data Summarization: Generates key insights from the data, including the most frequently infringed domains and their associated IP addresses.
 
-## 📥 Input:
-Nested data structure containing multiple infringing URLs.
+## 📥 Source:
+Nested data structure containing multiple infringing URLs, which is response.json file (Given by professor)
 
 ## 📤 Output:
 A flattened CSV file where each row corresponds to an infringing URL, along with its domain and IP address.
