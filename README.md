@@ -2,68 +2,7 @@
 This repository contains a Python script designed to flatten nested data structures, extract and analyze infringing URLs, and generate insightful summaries. The project utilizes parallel processing to efficiently handle large datasets, making it suitable for high-performance environments.
 
 ## Workflow
- Nested JSON Data
-              |
-              v
-       +---------------------+
-       | Flattened Data      |  (CSV format)
-       | Libraries:          |
-       | - pandas            |
-       +---------------------+
-              |
-              v
-   +---------------------+       +----------------------+
-   | Extract Domain      |       | Resolve to IP Address|
-   | Libraries:          |       | Libraries:           |
-   | - urlparse (Python) |       | - socket (Python)    |
-   | - parse_url (R)     |       | - resolve (R)        |
-   +---------------------+       +----------------------+
-              |                        |
-              v                        v
-   +---------------------+       +----------------------+
-   | Extracted Domains   |       | IP Addresses         |
-   +---------------------+       +----------------------+
-              |                        |
-              v                        v
-   +------------------------------------------------+
-   |       Combined Data with Domains & IPs         |
-   | Libraries:                                      |
-   | - concurrent.futures (Python)                   |
-   | - future (R)                                    |
-   +------------------------------------------------+
-              |
-              v
-   +----------------------------+
-   | Handle Missing Values      |
-   | Libraries:                 |
-   | - pandas (Python)          |
-   | - dplyr (R)                |
-   +----------------------------+
-              |
-              v
-   +----------------------------+
-   | Data with Handled Values   |
-   +----------------------------+
-              |
-              v
-   +-----------------------------------+
-   |        Data Summarization         |
-   |        & Analysis                 |
-   | Libraries:                        |
-   | - pandas (Python)                |
-   | - ggplot2 (R)                     |
-   | - matplotlib (Python)            |
-   | - seaborn (Python)               |
-   +-----------------------------------+
-              |
-              v
-   +-----------------------------------+
-   |          Visualizations           |
-   | Libraries:                        |
-   | - matplotlib (Python)            |
-   | - seaborn (Python)               |
-   | - ggplot2 (R)                     |
-   +-----------------------------------+
+![flowdiagram drawio](https://github.com/user-attachments/assets/b6398730-d059-4c1d-9949-3f888a578e63)
 
 ## ✨ Features
 1. 🗂️ Data Flattening: Automatically flattens nested JSON or similar data structures.
