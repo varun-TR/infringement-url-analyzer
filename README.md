@@ -41,7 +41,22 @@ The analysis script includes the following key components:
     # Saving the flattened data to CSV
     df.to_csv('flattened_json_data.csv', index=False)
     ```
-Note: Even R, SQL can also be used for flattening JSON but for simplicity purposes i have used python.
+    ```R
+        # Flatten the 'notices' list into a data frame
+    notices_df <- data$notices
+
+        # Unnest the 'works' column
+        notices_df <- notices_df %>%
+          mutate(works = map(works, ~ as.data.frame(.))) %>%
+          unnest(works)
+    
+        # Unnest the 'infringing_urls' within 'works'
+        notices_df <- notices_df %>%
+          mutate(infringing_urls = map(infringing_urls, ~ as.data.frame(.))) %>%
+          unnest(infringing_urls)
+
+    ```
+Note: Even SQL can also be used for flattening JSON but for simplicity purposes i have used python.
 
 2. **Domain and IP Address Extraction** (R/Python):
 
