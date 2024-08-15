@@ -1,0 +1,265 @@
+---
+title: "assignment1"
+author: "varun"
+date: "2024-08-15"
+output: html_document
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(jsonlite)
+library(tidyr)
+library(dplyr)
+library(purrr)
+
+# Load the JSON data
+data <- fromJSON('/Users/trsaivarun/Downloads/response.json')
+
+# Inspect the structure of the data
+str(data)
+
+# Flatten the 'notices' list into a data frame
+notices_df <- data$notices
+
+# Unnest the 'works' column
+notices_df <- notices_df %>%
+  mutate(works = map(works, ~ as.data.frame(.))) %>%
+  unnest(works)
+
+# Unnest the 'infringing_urls' within 'works'
+notices_df <- notices_df %>%
+  mutate(infringing_urls = map(infringing_urls, ~ as.data.frame(.))) %>%
+  unnest(infringing_urls)
+
+# Select and rename the necessary columns
+df <- notices_df %>%
+  select(id, type, title, date_sent, date_received, description, url) %>%
+  rename(
+    `infringing URL` = url,
+    work_description = description
+  )
+
+# Save the flattened data to CSV
+write.csv(df, '/Users/trsaivarun/Desktop/c_py:R/flattened_json_data_R.csv', row.names = FALSE)
+
+```
+
+```{r}
+df <- read.csv('/Users/trsaivarun/Desktop/c_py:R/flattened_json_data_R.csv')
+head(df)
+```
+```{r}
+install.packages('dns')
+```
+
+
+```{r}
+install.packages('pingr') # using pingr for simplcity. (as manual resolution takeing time)
+```
+
+
+```{r}
+
+#using nslookup techniques for faster processing speeds.
+
+library(dplyr)
+library(urltools)
+library(parallel)
+
+# Sample DataFrame (replace this with your actual data)
+df <- read.csv('/Users/trsaivarun/Desktop/c_py:R/flattened_json_data_R.csv')
+
+# Function to extract domain from a URL
+extract_domain <- function(url) {
+  domain(url)
+}
+
+# Function to get IP address for a domain using nslookup
+get_ip <- function(domain) {
+  tryCatch({
+    result <- system(paste("nslookup", domain), intern = TRUE)
+    ip_lines <- grep("Address:", result, value = TRUE)
+    if (length(ip_lines) > 1) {
+      ip <- sub("Address: ", "", ip_lines[2])  # Take the second Address if multiple
+    } else if (length(ip_lines) == 1) {
+      ip <- sub("Address: ", "", ip_lines[1])
+    } else {
+      ip <- NA
+    }
+    return(ip)
+  }, error = function(e) {
+    return(NA)
+  })
+}
+
+# Extract domain from infringing URLs
+df <- df %>%
+  mutate(domain = sapply(`infringing.URL`, extract_domain))
+
+# Parallelize IP resolution using mclapply
+df$IP_address <- mclapply(df$domain, get_ip, mc.cores = 4)  # Adjust the number of cores as needed
+
+# Convert the list of IP addresses to a vector
+df$IP_address <- unlist(df$IP_address)
+
+# Save the updated DataFrame to CSV
+write.csv(df, '/Users/trsaivarun/Desktop/flattened_data_with_domain_ip___R.csv', row.names = FALSE)
+
+# some domains doesn't have urls in response.json
+
+
+```
+
+
+
+```{r}
+# Load necessary library
+library(readr)
+
+# Load the CSV file with the IP addresses and domains
+df <- read_csv('/Users/trsaivarun/Desktop/flattened_data_with_domain_ip___R.csv')
+
+# Count missing values for each column
+missing_counts <- colSums(is.na(df))
+
+# Print the result
+print(missing_counts)
+
+```
+
+
+
+```{r}
+library(readr)
+library(ggplot2)
+library(dplyr)
+
+# Load the CSV file with the IP addresses and domains
+df <- read_csv('/Users/trsaivarun/Desktop/flattened_data_with_domain_ip___R.csv')
+
+# Count missing values for each column
+missing_counts <- colSums(is.na(df))
+
+# Convert to data frame for plotting
+missing_counts_df <- data.frame(
+  Column = names(missing_counts),
+  MissingValues = missing_counts
+)
+
+# Plot bar chart
+ggplot(missing_counts_df, aes(x = Column, y = MissingValues)) +
+  geom_bar(stat = "identity", fill = "skyblue") +
+  labs(x = "Columns", y = "Number of Missing Values", title = "Number of Missing Values by Column") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  theme_minimal()
+
+```
+
+```{r}
+df <- read_csv('/Users/trsaivarun/Desktop/flattened_data_with_domain_ip___R.csv')
+
+# Count the frequency of each infringing URL
+url_counts <- df %>%
+  count(`infringing.URL`) %>%
+  arrange(desc(n))
+
+# Get the top 10 most frequent infringing URLs
+top_urls <- head(url_counts, 10)
+
+# Print the result
+print(top_urls)
+```
+
+
+
+
+```{r}
+# Load necessary libraries
+library(dplyr)
+library(ggplot2)
+library(readr)
+
+# Load the CSV file with the IP addresses and domains
+df <- read_csv('/Users/trsaivarun/Desktop/flattened_data_with_domain_ip___R.csv')
+
+# Count the frequency of each IP address
+ip_counts <- df %>%
+  count(`IP_address`) %>%
+  arrange(desc(n))
+
+# Get the top 10 most frequent IP addresses
+top_ip_addresses <- head(ip_counts, 10)
+
+# Plotting
+ggplot(top_ip_addresses, aes(x = reorder(`IP_address`, n), y = n)) +
+  geom_bar(stat = "identity", fill = "red") +
+  labs(x = 'IP Address', y = 'Frequency', title = 'Top 10 Most Frequent IP Addresses') +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
+
+```
+
+```{r}
+# Load necessary libraries
+library(dplyr)
+library(ggplot2)
+library(readr)
+
+# Load the CSV file with the IP addresses and domains
+df <- read_csv('/Users/trsaivarun/Desktop/flattened_data_with_domain_ip___R.csv')
+
+# Count of infringing URLs per domain
+domain_counts <- df %>%
+  count(domain) %>%
+  arrange(desc(n))
+
+# Get the top 10 domains with most infringing URLs
+top_domains <- head(domain_counts, 10)
+
+# Plot
+ggplot(top_domains, aes(x = reorder(domain, n), y = n)) +
+  geom_bar(stat = "identity", fill = "skyblue") +
+  labs(title = 'Top 10 Domains with Most Infringing URLs',
+       x = 'Domain',
+       y = 'Count of Infringing URLs') +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+
+```
+
+```{r}
+# Load necessary libraries
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(lubridate)  # For date manipulation
+
+# Load the CSV file
+df <- read_csv('flattened_data_with_domain_ip__.csv')
+
+# Convert 'date_received' to Date format
+df$date_received <- as.Date(df$date_received, format = "%Y-%m-%d")
+
+# Count occurrences per day
+daily_counts <- df %>%
+  count(date_received) %>%
+  arrange(date_received)
+
+# Plot the daily counts
+ggplot(daily_counts, aes(x = date_received, y = n)) +
+  geom_line(color = "skyblue") +
+  geom_point(color = "skyblue") +
+  labs(title = 'Number of Fake URLs Received Per Day',
+       x = 'Date',
+       y = 'Number of Fake URLs') +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
+
+```
+
