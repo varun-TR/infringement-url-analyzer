@@ -56,7 +56,7 @@ The analysis script includes the following key components:
           unnest(infringing_urls)
 
     ```
-Note: Even SQL can also be used for flattening JSON but for simplicity purposes i have used python.
+Note: Even SQL can also be used for flattening JSON.
 
 2. **Domain and IP Address Extraction** (R/Python):
 
