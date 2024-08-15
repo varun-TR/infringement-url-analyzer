@@ -25,7 +25,7 @@ The script is designed to run efficiently on systems with multiple CPUs. It leve
 
 The analysis script includes the following key components:
 
-1. **Data Flattening** (Python): 
+1. **Data Flattening** (Python, R): 
 
     ```python
     df = json_normalize(data['notices'], record_path=['works', 'infringing_urls'], 
