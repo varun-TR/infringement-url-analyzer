@@ -63,37 +63,30 @@ Note: Even R, SQL can also be used for flattening JSON but for simplicity purpos
     ```R
     # Function to extract domain from a URL
     extract_domain <- function(url) {
-      parsed <- parse_url(url)
-      return(parsed$hostname)
+      domain(url)
     }
 
-    # Function to extract domain from a URL
-    extract_domain <- function(url) {
-      parsed <- parse_url(url)
-      # Return hostname or NA if hostname is missing
-      if (is.null(parsed$hostname)) {
-        return(NA)
-      } else {
-        return(parsed$hostname)
-      }
-    }
-
-    # Function to get IP address for a domain
+    # Function to get IP address for a domain using nslookup
     get_ip <- function(domain) {
-      ip <- tryCatch({
-        ip <- resolve(domain)$ip_address
+      tryCatch({
+        result <- system(paste("nslookup", domain), intern = TRUE)
+        ip_lines <- grep("Address:", result, value = TRUE)
+        if (length(ip_lines) > 1) {
+          ip <- sub("Address: ", "", ip_lines[2])  # Take the second Address if multiple
+        } else if (length(ip_lines) == 1) {
+          ip <- sub("Address: ", "", ip_lines[1])
+        } else {
+          ip <- NA
+        }
+        return(ip)
       }, error = function(e) {
         return(NA)
       })
-      return(ip)
     }
-
     
-    # Extract domain and IP address
+    # Extract domain from infringing URLs
     df <- df %>%
-      mutate(Domain = future_map_chr(infringing.URL, extract_domain, .progress = TRUE),
-             IP_Address = future_map_chr(Domain, get_ip, .progress = TRUE))
-
+      mutate(domain = sapply(`infringing.URL`, extract_domain))
     ```
 3. **Parallel Processing**:
 
