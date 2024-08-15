@@ -25,7 +25,7 @@ The script is designed to run efficiently on systems with multiple CPUs. It leve
 
 The analysis script includes the following key components:
 
-1. **Data Flattening** (Python, R): 
+1. **Data Flattening** (Python): 
 
     ```python
     df = json_normalize(data['notices'], record_path=['works', 'infringing_urls'], 
@@ -41,6 +41,7 @@ The analysis script includes the following key components:
     # Saving the flattened data to CSV
     df.to_csv('flattened_json_data.csv', index=False)
     ```
+    (R code)
     ```R
         # Flatten the 'notices' list into a data frame
     notices_df <- data$notices
