@@ -22,7 +22,7 @@ library(purrr)
 data <- fromJSON('/Users/trsaivarun/Downloads/response.json')
 
 # Inspect the structure of the data
-str(data)
+# str(data)
 
 # Flatten the 'notices' list into a data frame
 notices_df <- data$notices
@@ -54,6 +54,8 @@ write.csv(df, '/Users/trsaivarun/Desktop/c_py:R/flattened_json_data_R.csv', row.
 df <- read.csv('/Users/trsaivarun/Desktop/c_py:R/flattened_json_data_R.csv')
 head(df)
 ```
+
+
 ```{r}
 install.packages('dns')
 ```
@@ -111,7 +113,7 @@ df$IP_address <- unlist(df$IP_address)
 # Save the updated DataFrame to CSV
 write.csv(df, '/Users/trsaivarun/Desktop/flattened_data_with_domain_ip___R.csv', row.names = FALSE)
 
-# some domains doesn't have urls in response.json
+# some domains doesn't have ipaddresses in response.json -- as most of these are fake urls
 
 
 ```
@@ -179,31 +181,7 @@ print(top_urls)
 
 
 
-```{r}
-# Load necessary libraries
-library(dplyr)
-library(ggplot2)
-library(readr)
 
-# Load the CSV file with the IP addresses and domains
-df <- read_csv('/Users/trsaivarun/Desktop/flattened_data_with_domain_ip___R.csv')
-
-# Count the frequency of each IP address
-ip_counts <- df %>%
-  count(`IP_address`) %>%
-  arrange(desc(n))
-
-# Get the top 10 most frequent IP addresses
-top_ip_addresses <- head(ip_counts, 10)
-
-# Plotting
-ggplot(top_ip_addresses, aes(x = reorder(`IP_address`, n), y = n)) +
-  geom_bar(stat = "identity", fill = "red") +
-  labs(x = 'IP Address', y = 'Frequency', title = 'Top 10 Most Frequent IP Addresses') +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
-
-```
 
 ```{r}
 # Load necessary libraries
@@ -261,5 +239,32 @@ ggplot(daily_counts, aes(x = date_received, y = n)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
 
+```
+
+```{r}
+# Load necessary libraries
+library(dplyr)
+library(ggplot2)
+library(readr)
+
+# Load the CSV file with the IP addresses and domains
+df <- read_csv('/Users/trsaivarun/Desktop/flattened_data_with_domain_ip___R.csv')
+
+# Count the frequency of each IP address
+ip_counts <- df %>%
+  count(`IP_address`) %>%
+  arrange(desc(n))
+
+# Get the top 10 most frequent IP addresses
+top_ip_addresses <- head(ip_counts, 10)
+
+# Plotting
+ggplot(top_ip_addresses, aes(x = reorder(`IP_address`, n), y = n)) +
+  geom_bar(stat = "identity", fill = "red") +
+  labs(x = 'IP Address', y = 'Frequency', title = 'Top 10 Most Frequent IP Addresses') +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
+
+```
 ```
 
